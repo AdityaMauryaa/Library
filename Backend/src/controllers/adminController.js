@@ -1,10 +1,8 @@
 const User = require('../models/User');
 const { generateToken } = require('../utils/jwt');
 
-// Temporary function to create admin user
 const createAdmin = async (req, res) => {
   try {
-    // Check if admin already exists
     const existingAdmin = await User.findOne({ role: 'Administrator' });
     if (existingAdmin) {
       return res.status(409).json({
@@ -13,7 +11,6 @@ const createAdmin = async (req, res) => {
       });
     }
 
-    // Create admin user with default credentials
     const adminData = {
       name: 'Library Admin',
       email: 'admin@library.com',

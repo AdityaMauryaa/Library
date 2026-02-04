@@ -20,7 +20,6 @@ const getAllCourses = async (req, res) => {
   }
 };
 
-// Add new course (Admin only)
 const createCourse = async (req, res) => {
   try {
     const errors = validationResult(req);
