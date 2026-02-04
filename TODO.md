@@ -12,13 +12,13 @@ Build a full-stack Library Management System for handling **student registration
 ## 📌 Phase 1: Project Setup & Configuration
 
 ### Backend Setup
-- [ ] Initialize Express.js server with proper folder structure
-- [ ] Set up MongoDB database connection using Mongoose
-- [ ] Configure environment variables (.env file)
-- [ ] Set up CORS middleware for frontend communication
-- [ ] Create folder structure (routes, controllers, models, middleware, config)
-- [ ] Set up error handling middleware
-- [ ] Configure morgan for request logging
+- [x] Initialize Express.js server with proper folder structure
+- [x] Set up MongoDB database connection using Mongoose
+- [x] Configure environment variables (.env file)
+- [x] Set up CORS middleware for frontend communication
+- [x] Create folder structure (routes, controllers, models, middleware, config)
+- [x] Set up error handling middleware
+- [x] Configure morgan for request logging
 
 ### Frontend Setup
 - [ ] Install dependencies (React Router, Axios, React Toastify)
@@ -28,26 +28,24 @@ Build a full-stack Library Management System for handling **student registration
 - [ ] Create authentication context for state management
 
 ### Database Setup
-- [ ] Design MongoDB schemas for all collections
-- [ ] Create Student schema
-- [ ] Create Book schema
-- [ ] Create Course schema
-- [ ] Create BorrowedBook/Transaction schema
-- [ ] Add appropriate indexes for performance
+- [x] Design MongoDB schemas for all collections
+- [x] Create Student schema
+- [x] Create Book schema
+- [x] Create Course schema
+- [x] Create BorrowedBook
 
 ---
 
 ## 📌 Phase 2: Authentication Module (JWT Based)
 
 ### Backend - Auth APIs
-- [ ] Create User/Student model with role field (Student, Administrator)
-- [ ] POST `/api/auth/register` - Student registration
-- [ ] POST `/api/auth/login` - User login (returns JWT token)
-- [ ] GET `/api/auth/profile` - Get logged in user profile
-- [ ] Create JWT token generation utility
-- [ ] Implement password hashing with bcrypt
-- [ ] Create auth middleware to protect routes
-- [ ] Create role-based authorization middleware
+- [x] Create User/Student model with role field (Student, Administrator)
+- [x] POST `/api/auth/register` - Student registration
+- [x] POST `/api/auth/login` - User login (returns JWT token)
+- [x] GET `/api/auth/profile` - Get logged in user profile
+- [x] Create JWT token generation utility
+- [x] Create auth middleware to protect routes
+- [x] Create role-based authorization middleware
 
 ### Frontend - Auth Pages
 - [ ] Create Login page with form validation
@@ -63,11 +61,11 @@ Build a full-stack Library Management System for handling **student registration
 ## 📌 Phase 3: Course Management Module
 
 ### Backend - Course APIs
-- [ ] Create Course model (courseName, courseCode, description)
-- [ ] GET `/api/courses` - Get all courses (for registration dropdown)
-- [ ] POST `/api/courses` - Add new course (Admin only)
-- [ ] PUT `/api/courses/:id` - Update course (Admin only)
-- [ ] DELETE `/api/courses/:id` - Delete course (Admin only)
+- [x] Create Course model (courseName, courseCode, description)
+- [x] GET `/api/courses` - Get all courses (for registration dropdown)
+- [x] POST `/api/courses` - Add new course (Admin only)
+- [x] PUT `/api/courses/:id` - Update course (Admin only)
+- [x] DELETE `/api/courses/:id` - Delete course (Admin only)
 
 ### Frontend - Course Features
 - [ ] Course selection dropdown in registration
@@ -79,14 +77,14 @@ Build a full-stack Library Management System for handling **student registration
 ## 📌 Phase 4: Book Management Module
 
 ### Backend - Book APIs
-- [ ] Create Book model (title, author, ISBN, quantity, availableQty, category)
-- [ ] GET `/api/books` - Get all books with pagination
-- [ ] GET `/api/books/available` - Get available books only
-- [ ] GET `/api/books/:id` - Get single book details
-- [ ] POST `/api/books` - Add new book (Admin only)
-- [ ] PUT `/api/books/:id` - Update book (Admin only)
-- [ ] DELETE `/api/books/:id` - Delete book (Admin only)
-- [ ] GET `/api/books/search?q=query` - Search books by title/author
+- [x] Create Book model (title, author, ISBN, quantity, availableQty, category)
+- [x] GET `/api/books` - Get all books with pagination
+- [x] GET `/api/books/available` - Get available books only
+- [x] GET `/api/books/:id` - Get single book details
+- [x] POST `/api/books` - Add new book (Admin only)
+- [x] PUT `/api/books/:id` - Update book (Admin only)
+- [x] DELETE `/api/books/:id` - Delete book (Admin only)
+- [x] GET `/api/books/search?q=query` - Search books by title/author
 
 ### Frontend - Book Features
 - [ ] Book listing page with search & filters
@@ -101,11 +99,11 @@ Build a full-stack Library Management System for handling **student registration
 ## 📌 Phase 5: Student Management Module (Admin Only)
 
 ### Backend - Student APIs
-- [ ] GET `/api/students` - Get all students with pagination (Admin)
-- [ ] GET `/api/students/:id` - Get single student details (Admin)
-- [ ] PUT `/api/students/:id` - Update student info (Admin)
-- [ ] DELETE `/api/students/:id` - Delete student (Admin)
-- [ ] GET `/api/students/:id/borrowed-books` - Get student's borrowed books
+- [x] GET `/api/students` - Get all students with pagination (Admin)
+- [x] GET `/api/students/:id` - Get single student details (Admin)
+- [x] PUT `/api/students/:id` - Update student info (Admin)
+- [x] DELETE `/api/students/:id` - Delete student (Admin)
+- [x] GET `/api/students/:id/borrowed-books` - Get student's borrowed books
 
 ### Frontend - Student Management
 - [ ] Student list page with search (Admin)
@@ -118,14 +116,13 @@ Build a full-stack Library Management System for handling **student registration
 ## 📌 Phase 6: Book Borrowing & Return Module
 
 ### Backend - Transaction APIs
-- [ ] Create BorrowedBook model (studentId, bookId, issueDate, dueDate, returnDate, fine, status)
-- [ ] POST `/api/borrow` - Issue book to student
-- [ ] POST `/api/return/:transactionId` - Return a book
-- [ ] GET `/api/borrowed` - Get all borrowed books (Admin)
-- [ ] GET `/api/borrowed/my-books` - Get current user's borrowed books (Student)
-- [ ] GET `/api/borrowed/overdue` - Get overdue books list (Admin)
-- [ ] Calculate fine for late returns automatically
-- [ ] Update book availability on issue/return
+- [x] Create BorrowedBook model (studentId, bookId, issueDate, dueDate, returnDate, status)
+- [x] POST `/api/borrow` - Issue book to student
+- [x] POST `/api/return/:transactionId` - Return a book
+- [x] GET `/api/borrowed` - Get all borrowed books (Admin)
+- [x] GET `/api/borrowed/my-books` - Get current user's borrowed books (Student)
+- [x] GET `/api/borrowed/overdue` - Get overdue books list (Admin)
+- [x] Update book availability on issue/return
 
 ### Frontend - Borrowing Features
 - [ ] **Student View:**
@@ -144,7 +141,7 @@ Build a full-stack Library Management System for handling **student registration
 ## 📌 Phase 7: Dashboard & Reports
 
 ### Backend - Analytics APIs
-- [ ] GET `/api/dashboard/stats` - Get dashboard statistics
+- [x] GET `/api/dashboard/stats` - Get dashboard statistics
   - Total books count
   - Total students count
   - Books issued today
@@ -161,7 +158,7 @@ Build a full-stack Library Management System for handling **student registration
 ## 📌 Phase 8: API Documentation & Validation
 
 ### Postman Collection
-- [ ] Create Postman collection for all APIs
+- [ ] Create Simple api for postman dont make it complicated simple 
 - [ ] Add environment variables (base_url, token)
 - [ ] Document request/response formats for each endpoint
 - [ ] Add example requests with valid data
