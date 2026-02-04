@@ -2,6 +2,9 @@ const User = require('../models/User');
 const { generateToken } = require('../utils/jwt');
 const { validationResult } = require('express-validator');
 
+// Secret code for admin registration - in production, use environment variable
+const ADMIN_SECRET_CODE = process.env.ADMIN_SECRET_CODE || 'ADMIN2024';
+
 const register = async (req, res) => {
   try {
     const errors = validationResult(req);
@@ -13,7 +16,7 @@ const register = async (req, res) => {
       });
     }
 
-    const { name, email, password } = req.body;
+    const { name, email, password, role, adminCode } = req.body;
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -23,7 +26,20 @@ const register = async (req, res) => {
       });
     }
 
-    const user = new User({ name, email, password, role: 'Student' });
+    // Determine user role
+    let userRole = 'Student';
+    if (role === 'Administrator') {
+      // Verify admin secret code
+      if (!adminCode || adminCode !== ADMIN_SECRET_CODE) {
+        return res.status(403).json({
+          success: false,
+          message: 'Invalid admin secret code',
+        });
+      }
+      userRole = 'Administrator';
+    }
+
+    const user = new User({ name, email, password, role: userRole });
     await user.save();
 
     const token = generateToken({
@@ -34,7 +50,7 @@ const register = async (req, res) => {
 
     res.status(201).json({
       success: true,
-      message: 'Student registered successfully',
+      message: `${userRole} registered successfully`,
       data: { token, user },
     });
   } catch (error) {
