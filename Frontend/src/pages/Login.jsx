@@ -54,7 +54,15 @@ const Login = () => {
       const response = await login(formData);
       if (response.success) {
         toast.success('Login successful!');
-        navigate(from, { replace: true });
+        // Navigate based on user role
+        const userRole = response.data?.user?.role;
+        if (from !== '/') {
+          navigate(from, { replace: true });
+        } else if (userRole === 'Administrator') {
+          navigate('/admin/dashboard', { replace: true });
+        } else {
+          navigate('/dashboard', { replace: true });
+        }
       }
     } catch (error) {
       const message = error.response?.data?.message || 'Login failed';

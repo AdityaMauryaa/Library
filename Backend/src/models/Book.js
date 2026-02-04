@@ -40,11 +40,9 @@ const bookSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-
 // Indexes for search and performance
 bookSchema.index({ title: 'text', author: 'text' });
 bookSchema.index({ ISBN: 1 });
 bookSchema.index({ course: 1 });
 bookSchema.index({ availableQty: 1 });
-
 module.exports = mongoose.model('Book', bookSchema);

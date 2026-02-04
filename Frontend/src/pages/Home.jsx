@@ -11,6 +11,7 @@ import {
   LogOut,
   LogIn,
   UserPlus,
+  BookMarked,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
@@ -19,18 +20,18 @@ const Home = () => {
 
   const adminCards = [
     {
+      title: 'Dashboard',
+      description: 'View library statistics and reports',
+      icon: BarChart3,
+      link: '/admin/dashboard',
+      color: 'from-indigo-500 to-indigo-600',
+    },
+    {
       title: 'Manage Books',
       description: 'Add, edit, or remove books from the library',
       icon: BookOpen,
-      link: '/admin/books',
+      link: '/books',
       color: 'from-blue-500 to-blue-600',
-    },
-    {
-      title: 'Manage Courses',
-      description: 'Add, edit, or remove courses',
-      icon: GraduationCap,
-      link: '/admin/courses',
-      color: 'from-purple-500 to-purple-600',
     },
     {
       title: 'Manage Students',
@@ -40,11 +41,11 @@ const Home = () => {
       color: 'from-green-500 to-green-600',
     },
     {
-      title: 'Dashboard',
-      description: 'View library statistics and reports',
-      icon: BarChart3,
-      link: '/admin/dashboard',
-      color: 'from-indigo-500 to-indigo-600',
+      title: 'Borrowed Books',
+      description: 'View and manage all borrowed books',
+      icon: BookMarked,
+      link: '/admin/borrowed',
+      color: 'from-purple-500 to-purple-600',
     },
     {
       title: 'Overdue Books',
@@ -53,9 +54,23 @@ const Home = () => {
       link: '/admin/overdue',
       color: 'from-red-500 to-red-600',
     },
+    {
+      title: 'Manage Courses',
+      description: 'Add, edit, or remove courses',
+      icon: GraduationCap,
+      link: '/admin/courses',
+      color: 'from-amber-500 to-amber-600',
+    },
   ];
 
   const studentCards = [
+    {
+      title: 'My Dashboard',
+      description: 'View your borrowing stats',
+      icon: BarChart3,
+      link: '/dashboard',
+      color: 'from-indigo-500 to-indigo-600',
+    },
     {
       title: 'Browse Books',
       description: 'Search and view available books',
@@ -69,13 +84,6 @@ const Home = () => {
       icon: Clock,
       link: '/my-books',
       color: 'from-purple-500 to-purple-600',
-    },
-    {
-      title: 'My Fines',
-      description: 'Check your pending fines',
-      icon: DollarSign,
-      link: '/my-fines',
-      color: 'from-amber-500 to-amber-600',
     },
   ];
 
