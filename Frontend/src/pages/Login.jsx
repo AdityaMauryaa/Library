@@ -30,6 +30,7 @@ const Login = () => {
 
     if (!formData.password) {
       newErrors.password = 'Password is required';
+    
     }
 
     setErrors(newErrors);
