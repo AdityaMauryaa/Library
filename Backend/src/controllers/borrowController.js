@@ -270,3 +270,87 @@ exports.getOverdueBooks = async (req, res, next) => {
     next(error);
   }
 };
+
+/**
+ * @desc    Student borrow book (self-service)
+ * @route   POST /api/borrow/self
+ * @access  Private/Student
+ */
+exports.borrowBookSelf = async (req, res, next) => {
+  try {
+    const { bookId } = req.body;
+    const studentId = req.user._id;
+
+    // Verify book exists and is available
+    const book = await Book.findById(bookId);
+    if (!book) {
+      return res.status(404).json({
+        success: false,
+        message: 'Book not found'
+      });
+    }
+
+    if (book.availableQty <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'Book is not available for borrowing'
+      });
+    }
+
+    // Check if student already has this book borrowed
+    const existingBorrow = await BorrowedBook.findOne({
+      studentId,
+      bookId,
+      status: 'Borrowed'
+    });
+
+    if (existingBorrow) {
+      return res.status(400).json({
+        success: false,
+        message: 'You have already borrowed this book'
+      });
+    }
+
+    // Check max books limit (optional: limit to 5 books at a time)
+    const currentBorrowedCount = await BorrowedBook.countDocuments({
+      studentId,
+      status: 'Borrowed'
+    });
+
+    if (currentBorrowedCount >= 5) {
+      return res.status(400).json({
+        success: false,
+        message: 'You have reached the maximum limit of 5 borrowed books'
+      });
+    }
+
+    // Calculate due date (14 days from now)
+    const issueDate = new Date();
+    const dueDate = new Date();
+    dueDate.setDate(dueDate.getDate() + BORROWING_PERIOD_DAYS);
+
+    // Create borrowed book record
+    const borrowedBook = await BorrowedBook.create({
+      studentId,
+      bookId,
+      issueDate,
+      dueDate,
+      status: 'Borrowed'
+    });
+
+    // Decrement book availability
+    book.availableQty -= 1;
+    await book.save();
+
+    // Populate details for response
+    await borrowedBook.populate('bookId', 'title author ISBN');
+
+    res.status(201).json({
+      success: true,
+      message: 'Book borrowed successfully',
+      data: borrowedBook
+    });
+  } catch (error) {
+    next(error);
+  }
+};

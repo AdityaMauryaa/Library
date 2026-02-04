@@ -6,7 +6,8 @@ const {
   returnBook,
   getAllBorrowed,
   getMyBorrowedBooks,
-  getOverdueBooks
+  getOverdueBooks,
+  borrowBookSelf
 } = require('../controllers/borrowController');
 const auth = require('../middleware/auth');
 const roleCheck = require('../middleware/roleCheck');
@@ -25,6 +26,14 @@ const issueBookValidation = [
     .withMessage('Invalid book ID')
 ];
 
+const selfBorrowValidation = [
+  body('bookId')
+    .notEmpty()
+    .withMessage('Book ID is required')
+    .isMongoId()
+    .withMessage('Invalid book ID')
+];
+
 // Protected routes - Admin only
 router.post('/borrow', auth, roleCheck('Administrator'), issueBookValidation, issueBook);
 router.post('/return/:transactionId', auth, roleCheck('Administrator'), returnBook);
@@ -33,5 +42,6 @@ router.get('/borrowed/overdue', auth, roleCheck('Administrator'), getOverdueBook
 
 // Protected routes - Student
 router.get('/borrowed/my-books', auth, getMyBorrowedBooks);
+router.post('/borrow/self', auth, roleCheck('Student'), selfBorrowValidation, borrowBookSelf);
 
 module.exports = router;

@@ -15,21 +15,24 @@ import {
   CheckCircle,
   AlertCircle,
   XCircle,
+  BookPlus,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import bookService from '../services/bookService';
 import courseService from '../services/courseService';
+import borrowService from '../services/borrowService';
 import BookFormModal from '../components/BookFormModal';
 
 const BookDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { isAdmin } = useAuth();
+  const { isAdmin, isStudent } = useAuth();
 
   const [book, setBook] = useState(null);
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [deleteLoading, setDeleteLoading] = useState(false);
+  const [borrowLoading, setBorrowLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formLoading, setFormLoading] = useState(false);
 
@@ -93,6 +96,24 @@ const BookDetails = () => {
       toast.error(error.response?.data?.message || 'Failed to update book');
     } finally {
       setFormLoading(false);
+    }
+  };
+
+  const handleBorrow = async () => {
+    if (!window.confirm('Do you want to borrow this book? You will have 14 days to return it.')) {
+      return;
+    }
+
+    try {
+      setBorrowLoading(true);
+      await borrowService.borrowBook(id);
+      toast.success('Book borrowed successfully! Check your borrowed books.');
+      // Refresh book data to update availability
+      await fetchBook();
+    } catch (error) {
+      toast.error(error.response?.data?.message || 'Failed to borrow book');
+    } finally {
+      setBorrowLoading(false);
     }
   };
 
@@ -181,6 +202,21 @@ const BookDetails = () => {
                   Delete
                 </button>
               </div>
+            )}
+            
+            {isStudent() && book?.availableQty > 0 && (
+              <button
+                onClick={handleBorrow}
+                disabled={borrowLoading}
+                className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl transition-all font-medium hover:shadow-lg hover:scale-105 disabled:opacity-50 disabled:hover:scale-100"
+              >
+                {borrowLoading ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <BookPlus className="w-4 h-4" />
+                )}
+                Borrow Book
+              </button>
             )}
           </div>
         </div>
@@ -357,6 +393,39 @@ const BookDetails = () => {
                   </span>
                 )}
               </p>
+              
+              {/* Student Borrow Button */}
+              {isStudent() && (
+                <div className="mt-4">
+                  {book.availableQty > 0 ? (
+                    <button
+                      onClick={handleBorrow}
+                      disabled={borrowLoading}
+                      className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl transition-all font-medium hover:shadow-lg hover:scale-[1.02] disabled:opacity-50 disabled:hover:scale-100"
+                    >
+                      {borrowLoading ? (
+                        <>
+                          <Loader2 className="w-5 h-5 animate-spin" />
+                          Borrowing...
+                        </>
+                      ) : (
+                        <>
+                          <BookPlus className="w-5 h-5" />
+                          Borrow This Book
+                        </>
+                      )}
+                    </button>
+                  ) : (
+                    <button
+                      disabled
+                      className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gray-300 text-gray-500 rounded-xl font-medium cursor-not-allowed"
+                    >
+                      <XCircle className="w-5 h-5" />
+                      Not Available
+                    </button>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -7,6 +7,12 @@ const borrowService = {
     return response.data;
   },
 
+  // Student borrow book (self-service)
+  borrowBook: async (bookId) => {
+    const response = await api.post('/borrow/self', { bookId });
+    return response.data;
+  },
+
   // Return a book (Admin only)
   returnBook: async (transactionId) => {
     const response = await api.post(`/return/${transactionId}`);
