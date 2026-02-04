@@ -21,11 +21,11 @@ Build a full-stack Library Management System for handling **student registration
 - [x] Configure morgan for request logging
 
 ### Frontend Setup
-- [ ] Install dependencies (React Router, Axios, React Toastify)
-- [ ] Set up project folder structure (components, pages, services, context)
-- [ ] Configure React Router for navigation
-- [ ] Set up Axios instance with base URL
-- [ ] Create authentication context for state management
+- [x] Install dependencies (React Router, Axios, React Toastify)
+- [x] Set up project folder structure (components, pages, services, context)
+- [x] Configure React Router for navigation
+- [x] Set up Axios instance with base URL
+- [x] Create authentication context for state management
 
 ### Database Setup
 - [x] Design MongoDB schemas for all collections
@@ -48,13 +48,13 @@ Build a full-stack Library Management System for handling **student registration
 - [x] Create role-based authorization middleware
 
 ### Frontend - Auth Pages
-- [ ] Create Login page with form validation
-- [ ] Create Student Registration page
-- [ ] Implement JWT token storage (localStorage/cookies)
-- [ ] Create Protected Route component
-- [ ] Create Auth Context for global state
-- [ ] Handle token expiry and auto-logout
-- [ ] Add role-based route protection
+- [x] Create Login page with form validation
+- [x] Create Student Registration page
+- [x] Implement JWT token storage (localStorage/cookies)
+- [x] Create Protected Route component
+- [x] Create Auth Context for global state
+- [x] Handle token expiry and auto-logout
+- [x] Add role-based route protection
 
 ---
 
@@ -68,9 +68,9 @@ Build a full-stack Library Management System for handling **student registration
 - [x] DELETE `/api/courses/:id` - Delete course (Admin only)
 
 ### Frontend - Course Features
-- [ ] Course selection dropdown in registration
-- [ ] Course management page (Admin only)
-- [ ] Add/Edit course form
+- [x] Course selection dropdown in registration
+- [x] Course management page (Admin only)
+- [x] Add/Edit course form
 
 ---
 
@@ -158,18 +158,18 @@ Build a full-stack Library Management System for handling **student registration
 ## 📌 Phase 8: API Documentation & Validation
 
 ### Postman Collection
-- [ ] Create Simple api for postman dont make it complicated simple 
-- [ ] Add environment variables (base_url, token)
-- [ ] Document request/response formats for each endpoint
-- [ ] Add example requests with valid data
-- [ ] Add example requests with invalid data (for error testing)
-- [ ] Export collection for submission
+- [x] Create Simple api for postman dont make it complicated simple 
+- [x] Add environment variables (base_url, token)
+- [x] Document request/response formats for each endpoint
+- [x] Add example requests with valid data
+- [x] Add example requests with invalid data (for error testing)
+- [x] Export collection for submission
 
 ### API Documentation
-- [ ] Document all API endpoints in README
-- [ ] Include request/response formats
-- [ ] Document error codes and HTTP status codes
-- [ ] Add usage examples
+- [x] Document all API endpoints in README
+- [x] Include request/response formats
+- [x] Document error codes and HTTP status codes
+- [x] Add usage examples
 
 ---
 
