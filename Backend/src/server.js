@@ -11,6 +11,7 @@ const bookRoutes = require('./routes/bookRoutes');
 const studentRoutes = require('./routes/studentRoutes');
 const borrowRoutes = require('./routes/borrowRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -39,6 +40,7 @@ app.use('/api/books', bookRoutes);
 app.use('/api/students', studentRoutes);
 app.use('/api', borrowRoutes);
 app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/admin', adminRoutes);
 
 // 404 Handler
 app.use((req, res) => {

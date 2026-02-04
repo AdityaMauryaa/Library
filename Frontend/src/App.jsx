@@ -51,6 +51,11 @@ function App() {
         } />
         
         {/* Admin Only Routes */}
+        <Route path="/admin/books" element={
+          <ProtectedRoute requiredRole="Administrator">
+            <ManageBooks />
+          </ProtectedRoute>
+        } />
         <Route path="/admin/courses" element={
           <ProtectedRoute requiredRole="Administrator">
             <ManageCourses />

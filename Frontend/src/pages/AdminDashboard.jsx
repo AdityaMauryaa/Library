@@ -103,7 +103,7 @@ const AdminDashboard = () => {
       title: 'Manage Books',
       description: 'Add, edit, or remove books',
       icon: BookOpen,
-      link: '/books',
+      link: '/admin/books',
       color: 'from-blue-500 to-blue-600',
     },
     {

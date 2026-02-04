@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  # Backend service
+  backend:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    container_name: library-backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+      MONGO_URI: mongodb+srv://library:library123@cluster1.5hugt77.mongodb.net/library?retryWrites=true&w=majority
+      JWT_SECRET: your-super-secret-jwt-key-change-this-in-production
+      JWT_EXPIRES_IN: 7d
+    ports:
+      - "3001:3001"

@@ -30,7 +30,7 @@ const Home = () => {
       title: 'Manage Books',
       description: 'Add, edit, or remove books from the library',
       icon: BookOpen,
-      link: '/books',
+      link: '/admin/books',
       color: 'from-blue-500 to-blue-600',
     },
     {
